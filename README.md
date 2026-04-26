@@ -134,21 +134,32 @@ customer-management/
 │   │           └── application.properties      # H2 test config
 │   └── pom.xml
 │
-└── frontend/                                   # React application
-    ├── src/
-    │   ├── api/
-    │   │   └── api.js                          # Axios API calls
-    │   ├── context/
-    │   │   └── MasterDataContext.jsx           # Global countries/cities state
-    │   ├── pages/
-    │   │   ├── CustomerListPage.jsx            # Paginated table view
-    │   │   ├── CustomerFormPage.jsx            # Create / Edit form
-    │   │   ├── CustomerDetailPage.jsx          # View customer detail
-    │   │   └── BulkUploadPage.jsx              # Excel upload with progress
-    │   ├── App.js
-    │   ├── App.css
-    │   └── index.js
-    └── package.json
+├── frontend/                                   # React application
+│   ├── src/
+│   │   ├── api/
+│   │   │   └── api.js                          # Axios API calls
+│   │   ├── context/
+│   │   │   └── MasterDataContext.jsx           # Global countries/cities state
+│   │   ├── pages/
+│   │   │   ├── CustomerListPage.jsx            # Paginated table view
+│   │   │   ├── CustomerFormPage.jsx            # Create / Edit form
+│   │   │   ├── CustomerDetailPage.jsx          # View customer detail
+│   │   │   └── BulkUploadPage.jsx              # Excel upload with progress
+│   │   ├── App.js
+│   │   ├── App.css
+│   │   └── index.js
+│   └── package.json
+│
+├── sql/                                        # Database scripts
+│   ├── schema.sql                              # DDL with table definitions (commented)
+│   └── data.sql                                # DML with user setup (commented)
+│
+├── sample-data/                                # Test datasets for bulk upload
+│   ├── Standard Dataset (With Headers).xlsx
+│   ├── Edge Case & Error Dataset (No Headers).xlsx
+│   └── Multi-Format Date Dataset (Mixed Headers).xlsx
+│
+└── README.md
 ```
 
 ---
@@ -170,7 +181,7 @@ Make sure the following are installed before running the project:
 
 ### 1. Create the database and user
 
-Open the MariaDB client and run:
+Open the MariaDB client and run the commands from [sql/data.sql](sql/data.sql):
 
 ```sql
 CREATE DATABASE IF NOT EXISTS customer_mgmt
@@ -186,8 +197,7 @@ FLUSH PRIVILEGES;
 
 ### 2. Run the DDL (Schema)
 
-```sql
-USE customer_mgmt;
+Execute the schema from [sql/schema.sql](sql/schema.sql):
 
 CREATE TABLE IF NOT EXISTS countries (
     id   BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -425,6 +435,16 @@ The app will be available at: `http://localhost:3000`
 ## Bulk Upload Guide
 
 The bulk upload feature supports creating or updating up to **1,000,000 customers** from a single `.xlsx` file.
+
+### Sample Test Datasets
+
+Three sample Excel files are provided in the [sample-data/](sample-data/) directory for testing:
+
+- **Standard Dataset (With Headers).xlsx** — Standard format with header row
+- **Edge Case & Error Dataset (No Headers).xlsx** — Tests handling of missing headers and validation errors
+- **Multi-Format Date Dataset (Mixed Headers).xlsx** — Tests various date formats and header detection
+
+Use these files to test the bulk upload feature before running with production data.
 
 ### Excel File Format
 
