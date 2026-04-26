@@ -150,7 +150,7 @@ customer-management/
 │   │   └── index.js
 │   └── package.json
 │
-├── sql/                                        # Database scripts
+├── database/                                   # Database scripts
 │   ├── schema.sql                              # DDL with table definitions (commented)
 │   └── data.sql                                # DML with user setup (commented)
 │
@@ -181,7 +181,7 @@ Make sure the following are installed before running the project:
 
 ### 1. Create the database and user
 
-Open the MariaDB client and run the commands from [sql/data.sql](sql/data.sql):
+Open the MariaDB client and run the commands from [database/data.sql](database/data.sql):
 
 ```sql
 CREATE DATABASE IF NOT EXISTS customer_mgmt
@@ -197,7 +197,10 @@ FLUSH PRIVILEGES;
 
 ### 2. Run the DDL (Schema)
 
-Execute the schema from [sql/schema.sql](sql/schema.sql):
+Execute the schema from [database/schema.sql](database/schema.sql):
+
+```sql
+USE customer_mgmt;
 
 CREATE TABLE IF NOT EXISTS countries (
     id   BIGINT AUTO_INCREMENT PRIMARY KEY,
