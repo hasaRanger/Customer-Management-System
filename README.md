@@ -263,7 +263,35 @@ INSERT INTO cities (name, country_id) VALUES
   ('London', 4), ('Manchester', 4), ('Birmingham', 4),
   ('Sydney', 5), ('Melbourne', 5), ('Brisbane', 5);
 ```
+### 4. Viewing the Database
 
+#### Option 1 — MariaDB Command Line (all platforms)
+```bash
+mysql -u cms_user -p
+# password: cms_pass123
+USE customer_mgmt;
+SHOW TABLES;
+SELECT * FROM customers;
+```
+
+#### Option 2 — HeidiSQL (Windows only, free)
+HeidiSQL comes bundled with the MariaDB Windows installer.
+1. Open **HeidiSQL** from Start Menu
+2. Click **New** → enter these details:
+   - Host: `127.0.0.1`
+   - User: `cms_user`
+   - Password: `cms_pass123`
+   - Port: `3306`
+3. Click **Open** → select `customer_mgmt` database on the left panel
+
+#### Option 3 — DBeaver (Windows / Mac / Linux, free)
+A universal DB GUI that works on all platforms.
+Download from [dbeaver.io](https://dbeaver.io/download/)
+1. New Connection → select **MariaDB**
+2. Host: `localhost`, Port: `3306`
+3. Database: `customer_mgmt`
+4. Username: `cms_user`, Password: `cms_pass123`
+5. Click **Finish**
 ---
 
 ## Backend Setup
