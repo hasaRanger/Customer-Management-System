@@ -1,0 +1,19 @@
+﻿# Backend build output
+backend/target/
+backend/.mvn/
+
+# Frontend dependencies and build
+frontend/node_modules/
+frontend/build/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Sensitive config
+application-local.properties
